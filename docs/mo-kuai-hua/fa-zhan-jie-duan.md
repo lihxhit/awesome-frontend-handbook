@@ -26,10 +26,53 @@ xxApp.namespace('app.user');
 })(window,document);
 ```
 
+##### CommonJs(Node)
 
+```javascript
+//math.js
+exports.add = function() {
+    var sum = 0, i = 0, args = arguments, l = args.length;
+    while (i < l) {
+        sum += args[i++];
+    }
+    return sum;
+};
+//increment.js
+var add = require('./math').add;
+exports.increment = function(val) {
+    return add(val, 1);
+};
+//program.js
+var inc = require('./increment').increment;
+var a = 1;
+inc(a); // 2
+```
 
+##### CMD(sea.js)
 
+##### AMD(require.js)
 
+##### ES6 Module
+
+```javascript
+//math.js
+export default function() {
+    var sum = 0, i = 0, args = arguments, l = args.length;
+    while (i < l) {
+        sum += args[i++];
+    }
+    return sum;
+};
+//increment.js
+import add from './math';
+exports default function(val) {
+    return add(val, 1);
+};
+//program.js
+import inc from './increment';
+var a = 1;
+inc(a); // 2
+```
 
 
 
