@@ -3,5 +3,16 @@
     "title": "awesome-frontend-handbook",
     "structure": {
       "readme": "README.md"
+    },
+    "plugins": [
+      "-highlight",
+      "livereload",
+      "prism",
+      "github"
+    ],
+    "pluginsConfig": {
+        "github": {
+            "url": "https://github.com/lihxhit/awesome-frontend-handbook.git"
+        }
     }
 }
