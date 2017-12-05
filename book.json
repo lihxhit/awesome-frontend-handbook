@@ -6,13 +6,27 @@
     },
     "plugins": [
       "-highlight",
+      "-search",
+      "sharing",
       "livereload",
+      "fontsettings",
       "prism",
-      "github"
+      "github",
+      "disqus",
+      "anchors",
+      "theme-gestalt", "-theme-default", "styles-sass-fix"
     ],
     "pluginsConfig": {
         "github": {
             "url": "https://github.com/lihxhit/awesome-frontend-handbook.git"
+        },
+        "fontsettings": {
+            "theme": "white",
+            "family": "serif",
+            "size":  1
+        },
+        "disqus": {
+            "shortName": "XXXXXXX"
         }
     }
 }

@@ -7,8 +7,10 @@
 
 ##### ESModule
 
+
 * 默认开启严格模式('use strict')
 * 静态解析
+
 
 
 webpack Tree Shaking
