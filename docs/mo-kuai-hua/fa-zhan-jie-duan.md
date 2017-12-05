@@ -54,7 +54,7 @@ inc(a); // 2
 
 ##### ES6 Module
 
-```javascript
+```js
 //math.js
 export default function() {
     var sum = 0, i = 0, args = arguments, l = args.length;
@@ -73,55 +73,6 @@ import inc from './increment';
 var a = 1;
 inc(a); // 2
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <script>
 var xxApp = {};
