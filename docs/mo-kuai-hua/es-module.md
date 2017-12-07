@@ -2,6 +2,8 @@
 
 ##### 语法
 
+* 导入模块
+
 ```js
 // 静态解析
 import defaultExport from "module-name";
@@ -16,6 +18,8 @@ import "module-name";
 // 动态引入
 const _ = await import('lodash');
 ```
+
+* 导出模块
 
 ```js
 export { name1, name2, …, nameN };

@@ -9,19 +9,30 @@ const fileName = 'xx.js';
 const xx = require(fileName);
 ```
 
-##### ESModule
+* 默认未开启严格模式
 
+```js
+console.log(this); // 指向module.exports
+function name(){
+    console.log(this);// 指向global
+}
+name();
+
+```
+
+node中未开启严格模式情况下全局this指向module.exports。
+
+##### ESModule
 
 * 默认开启严格模式('use strict')
 
 ```js
+console.log(this);// undefined
 function name(){
-    console.log(this);
+    console.log(this);// undefined
 }
 name();
 ```
-
-以上代码在nodejs中this指向全局变量global，而在ESModule中由于开启了严格模式所以指向undefined。
 
 * 静态解析
   * 只能作为模块顶层的语句出现，不能出现在 function 里面或是 if 里面
@@ -37,13 +48,75 @@ webpack 2.0 加入了这一特性。
 
 ```js
 //export.js
-export function a1(){}
-export function a2(){}
+export function a1(){alert('a1')};
+export function a2(){alert('a2')};
 //import.js
-import {a2} from './export.js'
+import {a1} from './export.js'
+a1('arguments')
 ```
 
+
+
+
+
 ###### 压缩后
+
+* 关闭tree shaking
+
+```js
+!function (modules) {
+    function __webpack_require__(moduleId) {
+        // ...some code
+    }
+    var installedModules = {};
+    // ...some code
+}([
+    function (module, exports, __webpack_require__) {
+        "use strict";
+        (0, __webpack_require__(1).a1)("arguements")
+    },
+    function (module, exports, __webpack_require__) {
+        "use strict";
+        Object.defineProperty(exports, "__esModule", {
+            value: !0
+        }),
+        exports.a1 = function () {
+            alert("!")
+        },
+        exports.a2 = function () {
+            alert("!!")
+        }
+    }
+]);
+```
+
+* 开启tree shaking
+
+```js
+!function (modules) {
+    function __webpack_require__(moduleId) {
+        // ...some code
+    }
+    var installedModules = {};
+    // ...some code
+}([
+    function (module, __webpack_exports__, __webpack_require__) {
+        "use strict";
+        Object.defineProperty(__webpack_exports__, "__esModule", {
+            value: !0
+        });
+        var __WEBPACK_IMPORTED_MODULE_0__es6_export__ = __webpack_require__(1);
+        Object(__WEBPACK_IMPORTED_MODULE_0__es6_export__.a)("arguements")
+    },
+    function (module, __webpack_exports__, __webpack_require__) {
+        "use strict";
+        __webpack_exports__.a = function () {
+            alert("!")
+        }
+    }
+]);
+```
+
 
 ###### webpack Tree Shaking 开启条件:
 
@@ -53,14 +126,16 @@ import {a2} from './export.js'
 
 ###### 不足：
 
-* npm公共模块大多不支持es2015 module
+* npm公共包大多不支持es2015 module
+* 与babel兼容做的不好，待babel重启modules属性
 
 ##### 结论
 
 * 浏览器端代码使用es2015 module，模块化使用灵活，且可充分利用Tree Shaking减小代码体积
 * 服务端node适合动态引入且不需要过多考虑代码体积所以使用commonjs规范，同时可以拥有更好的debug支持，提高开发效率
 
-###### Tips
+##### Tips
 
 * webpack内置uglifyPlugin版本相对较低，建议不使用内置版本，单独安装
 * babel6以下版本只需设置参数modules为false即可
+* 建议只import需要的方法，而不是import整个模块，便于去除dead_code

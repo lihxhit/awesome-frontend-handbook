@@ -18,7 +18,8 @@
       "prism",
       "github",
       "styles-sass-fix",
-      "advanced-emoji"
+      "advanced-emoji",
+      "splitter"
     ],
     "styles":{
         "website":"../styles/website.scss"
