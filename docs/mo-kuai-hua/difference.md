@@ -4,6 +4,8 @@
 
 * 模块运行时动态加载
 
+node中模块导入require是一个内置的函数，因此只有在运行后我们才可以得知模块导出内容，无法做静态分析
+
 ```js
 const fileName = 'xx.js';
 const xx = require(fileName);
@@ -19,6 +21,8 @@ function name(){
 name();
 
 ```
+
+
 
 node中未开启严格模式情况下全局this指向module.exports。
 
