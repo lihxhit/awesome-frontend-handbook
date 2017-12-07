@@ -4,4 +4,5 @@
 * [模块化](mo-kuai-hua/README.md)
   * [发展阶段](mo-kuai-hua/fa-zhan-jie-duan.md)
   * [CommonJs](mo-kuai-hua/commonjs.md)
+  * [ESModule](mo-kuai-hua/es-module.md)
   * [CommonJs与es6区别](mo-kuai-hua/difference.md)

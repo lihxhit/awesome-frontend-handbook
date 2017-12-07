@@ -1,18 +1,24 @@
 {
     "root": "./docs",
-    "title": "awesome-frontend-handbook",
+    "title": "Awesome Frontend Handbook",
+    "language" : "zh-hans",
+    "author" : "lihxhit",
+    "description" : "学习笔记",
     "structure": {
       "readme": "README.md"
     },
     "plugins": [
       "-highlight",
-      "search",
+      "-lunr",
+      "-search",
+      "search-pro",
       "sharing",
       "livereload",
       "fontsettings",
       "prism",
       "github",
-      "styles-sass-fix"
+      "styles-sass-fix",
+      "advanced-emoji"
     ],
     "styles":{
         "website":"../styles/website.scss"
@@ -27,7 +33,7 @@
             "size":  1
         },
         "theme-default":{
-            "showLevel":true
+            "showLevel":false
         }
 
     }

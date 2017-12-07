@@ -45,16 +45,19 @@ import {a2} from './export.js'
 
 ###### 压缩后
 
-webpack Tree Shaking 开启条件:
+###### webpack Tree Shaking 开启条件:
 
 * 使用es2015模块语法(import 与 export)
 * 使用支持无用代码移除(dead code removal)的插件，如 UglifyJSPlugin
 * 去除babel-loder的模块转换插件，交给webpack来做模块转换[babel 6.0+ 配置](http://2ality.com/2015/12/webpack-tree-shaking.html)
 
+###### 不足：
+
+* npm公共模块大多不支持es2015 module
 
 ##### 结论
 
-* 浏览器端代码使用es2015 module，充分利用Tree Shaking减小代码体积
+* 浏览器端代码使用es2015 module，模块化使用灵活，且可充分利用Tree Shaking减小代码体积
 * 服务端node适合动态引入且不需要过多考虑代码体积所以使用commonjs规范，同时可以拥有更好的debug支持，提高开发效率
 
 ###### Tips
