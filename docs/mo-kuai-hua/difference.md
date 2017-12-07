@@ -60,4 +60,4 @@ webpack Tree Shaking 开启条件:
 ###### Tips
 
 * webpack内置uglifyPlugin版本相对较低，建议不使用内置版本，单独安装
-* babel6以下版本只需设置参数modules为false即可
+* babel6以下版本只需设置参数modules为false即可，babel6及以上只能列出除去transform-es2015-modules-commonjs所有plugin
