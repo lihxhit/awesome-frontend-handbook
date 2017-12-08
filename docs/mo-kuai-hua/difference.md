@@ -19,10 +19,7 @@ function name(){
     console.log(this);// 指向global
 }
 name();
-
 ```
-
-
 
 node中未开启严格模式情况下全局this指向module.exports。
 
