@@ -138,5 +138,5 @@ a1('arguments')
 ##### Tips
 
 * webpack内置uglifyPlugin版本相对较低，建议不使用内置版本，单独安装
-* babel6以下版本只需设置参数modules为false即可
+* babel6以下版本只需设置参数modules为false即可，babel6及以上只能列出除去transform-es2015-modules-commonjs所有plugin
 * 建议只import需要的方法，而不是import整个模块，便于去除dead_code
