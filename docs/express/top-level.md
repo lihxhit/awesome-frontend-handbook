@@ -49,3 +49,38 @@ express.js文件内容如下:
 * events：Node.js核心模块之一，提供时间监听器与触发器。
 * merge-descriptors: 合并对象。
 
+```js
+25  /**
+26   * Expose `createApplication()`.
+27   */
+28
+29  exports = module.exports = createApplication;
+```
+
+29行通过module.exports导出了函数createApplication，由此可知express实例是通过执行createApplication函数获取到的。
+
+```js
+37  function createApplication() {
+38    var app = function(req, res, next) {
+39      app.handle(req, res, next);
+40    };
+41
+42    mixin(app, EventEmitter.prototype, false);
+43    mixin(app, proto, false);
+
+44    // expose the prototype that will get set on requests
+45    app.request = Object.create(req, {
+46    app: { configurable: true, enumerable: true, writable: true, value: app }
+47    })
+48
+49    // expose the prototype that will get set on responses
+50    app.response = Object.create(res, {
+51      app: { configurable: true, enumerable: true, writable: true, value: app }
+52    })
+53
+54    app.init();
+55    return app;
+56  }
+```
+
+38行用函数表达式方式创建一个函数，

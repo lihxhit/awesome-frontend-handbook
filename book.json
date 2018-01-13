@@ -11,19 +11,10 @@
       "-highlight",
       "-lunr",
       "-search",
-      "search-pro",
-      "sharing",
-      "livereload",
       "fontsettings",
       "prism",
-      "github",
-      "styles-sass-fix",
-      "advanced-emoji",
-      "splitter"
+      "github"
     ],
-    "styles":{
-        "website":"../styles/website.scss"
-    },
     "pluginsConfig": {
         "github": {
             "url": "https://github.com/lihxhit/awesome-frontend-handbook.git"
