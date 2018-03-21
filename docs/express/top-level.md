@@ -2,11 +2,25 @@
 
 我们从[Express官网](http://expressjs.com)提供的[Hello world example](http://expressjs.com/en/starter/hello-world.html)入手，分析express顶层结构。
 
-```js
+```js 简单的http服务
+const http = require('http');
+
+const server = http.createServer((req, res) => {
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'text/plain');
+  res.end('Hello World!\n');
+});
+
+server.listen(3000, () => {
+  console.log(`Server running at http://${hostname}:3000/`);
+});
+```
+
+```js 基于express的简单http服务
 1   const express = require('express')
 2   const app = express()
 3
-4   app.get('/', (req, res) => res.send('Hello World!'))
+4   app.use((req, res) => res.send('Hello World!'))
 5
 6   app.listen(3000, () => console.log('Example app listening on port 3000!'))
 ```
@@ -21,11 +35,11 @@ index.js文件内容如下：
 
 ```js
 // express > index.js
-9   'use strict';
-10  module.exports = require('./lib/express');
+1   'use strict';
+2  module.exports = require('./lib/express');
 ```
 
-通过分析第10行代码可以得知，index.js唯一的作用是引入并导出了'express.js'中导出的模块。
+由以上代码可以得知，index.js唯一的作用是引入并导出了'express.js'中导出的模块。
 
 因此我们继续分析express > lib > express.js文件。
 
@@ -83,4 +97,64 @@ express.js文件内容如下:
 56  }
 ```
 
-38行用函数表达式方式创建一个函数，
+38行用函数表达式方式创建一个函数，  
+
+```js
+59: /**
+60:  * Expose the prototypes.
+61:  */
+62:
+63: exports.application = proto;
+64: exports.request = req;
+65: exports.response = res;
+66:
+67: /**
+68:  * Expose constructors.
+69:  */
+70:
+71: exports.Route = Route;
+72: exports.Router = Router;
+73:
+74: /**
+75:  * Expose middleware
+76:  */
+77:
+78: exports.json = bodyParser.json
+79: exports.query = require('./middleware/query');
+80: exports.static = require('serve-static');
+81: exports.urlencoded = bodyParser.urlencoded
+```
+
+59-81行主要是导出了原型，构造函数，与常用中间件。
+
+```js
+087: ;[
+088:   'bodyParser',
+089:   'compress',
+090:   'cookieSession',
+091:   'session',
+092:   'logger',
+093:   'cookieParser',
+094:   'favicon',
+095:   'responseTime',
+096:   'errorHandler',
+097:   'timeout',
+098:   'methodOverride',
+099:   'vhost',
+100:   'csrf',
+101:   'directory',
+102:   'limit',
+103:   'multipart',
+104:   'staticCache',
+105: ].forEach(function (name) {
+106:   Object.defineProperty(exports, name, {
+107:     get: function () {
+108:       throw new Error('Most middleware (like ' + name + ') is no longer bundled with Express and must be installed separately. Please see        https://github.com/senchalabs/connect#middleware.');
+109:     },
+110:     configurable: true
+111:   });
+112: });
+113:
+```
+
+87到113行利用 Object.defineProperty 对exports进行属性定义，列出所有废弃和移除的中间件，当获取是会抛出异常。
